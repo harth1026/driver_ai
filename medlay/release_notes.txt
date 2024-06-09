@@ -1,0 +1,74 @@
+Crossturn Media Layer
+Release Notes
+
+OVERVIEW:
+	CTMEDLAY is a library made to provide a simple interface for graphical display, audio output,
+	and keyboard/mouse.  
+
+FUNCTIONS:
+
+*** ctmedlay.h
+// MANAGEMENT
+_DLLFUNC bool ctmedlay_initialize(std::string windowname, int screenx, int screeny);
+_DLLFUNC bool ctmedlay_uninitialize();
+_DLLFUNC bool ctmedlay_getscreensize(CVEC2* size);
+_DLLFUNC bool ctmedlay_pollevent(EVENTTYPE* eventtype);
+_DLLFUNC bool ctmedlay_geteventkey(EVENTKEY* eventkey);
+_DLLFUNC bool ctmedlay_getmouseposition(CVEC2* pos);
+_DLLFUNC int  ctmedlay_getticks();
+_DLLFUNC bool ctmedlay_sleep(int milliseconds);
+
+// GRAPHICS
+_DLLFUNC bool ctmedlay_drawline(CVEC2 a, CVEC2 b, CCOLOR col);
+_DLLFUNC bool ctmedlay_addimage(std::string bmpfile, MEDLAY_IMAGE* imageref, bool transparentbackground);
+_DLLFUNC bool ctmedlay_addimage_v11(std::string bmpfile, MEDLAY_IMAGE* imageref, CCOLOR* transparentcolor = nullptr);
+_DLLFUNC bool ctmedlay_arraytoimage(uint32_t* pixels, MEDLAY_IMAGE* imageref, int pitch);
+_DLLFUNC bool ctmedlay_freeallimages();
+_DLLFUNC bool ctmedlay_freeimage(MEDLAY_IMAGE imageref);
+_DLLFUNC bool ctmedlay_setimagetodisplay(MEDLAY_IMAGE imageref, CVEC2 pos, CRECT* srcrect = nullptr);
+_DLLFUNC bool ctmedlay_setimagetodisplay_adv(MEDLAY_IMAGE imageref, CVEC2 pos, double angle);
+_DLLFUNC bool ctmedlay_getimagesize(MEDLAY_IMAGE imageref, CVEC2* size);
+_DLLFUNC bool ctmedlay_setalphamodulation(MEDLAY_IMAGE imageref, int value);
+_DLLFUNC bool ctmedlay_cleardisplay();
+_DLLFUNC bool ctmedlay_displayimages();
+
+// TEXT
+_DLLFUNC bool ctmedlay_addfont(std::string fontfile, int fontsize, MEDLAY_FONT* fontref);
+_DLLFUNC bool ctmedlay_freeallfonts();
+_DLLFUNC bool ctmedlay_freefont(MEDLAY_FONT fontref);
+_DLLFUNC bool ctmedlay_texttoimage(MEDLAY_IMAGE* imageref, MEDLAY_FONT fontref, std::string text, CCOLOR col);
+
+// AUDIO
+_DLLFUNC bool ctmedlay_addmusic(std::string wavfile, MEDLAY_MUSIC* musicref);
+_DLLFUNC bool ctmedlay_freeallmusic();
+_DLLFUNC bool ctmedlay_freemusic(MEDLAY_MUSIC musicref);
+_DLLFUNC bool ctmedlay_playmusic(MEDLAY_MUSIC musicref);
+_DLLFUNC bool ctmedlay_stopmusic();
+_DLLFUNC bool ctmedlay_pausemusic();
+_DLLFUNC bool ctmedlay_resumemusic();
+_DLLFUNC bool ctmedlay_setmusicvolume(int volume);
+
+_DLLFUNC bool ctmedlay_addsound(std::string wavfile, MEDLAY_SOUND* soundref);
+_DLLFUNC bool ctmedlay_freeallsound();
+_DLLFUNC bool ctmedlay_freesound(MEDLAY_SOUND soundref);
+_DLLFUNC bool ctmedlay_playsound(MEDLAY_SOUND soundref);
+_DLLFUNC bool ctmedlay_setsoundvolume(int volume, int channel);
+
+
+DEPENDENCIES:
+	Preprocessor
+		WIN32;
+	SDL2.0
+		SDL2.lib;SDL2_image.lib;SDL2_mixer.lib;SDL2_ttf.lib;%(AdditionalDependencies)
+
+
+TODO:
+
+BUG LIST:
+
+
+RELEASES:
+
+1.0.0 - 6/6/24
+	- Initial release
+
