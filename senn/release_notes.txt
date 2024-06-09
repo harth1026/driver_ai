@@ -1,0 +1,116 @@
+Crossturn Simple Evolutionary Neural Network
+
+Release Notes
+
+OVERVIEW:
+	Simple Evolutionary Neural Network (SENN) is a reinforcement learning artificial intelligence library that
+	provides a method to create an AI neural network.  This is done by having the program run several versions
+	of an AI through the application.  The best performers of these AIs will move onto the next session while
+	the others are discarded.  Additional AIs are then created as mutations of these best performers.  This 
+	process continues until a satisfactory AI has been generated.
+
+DEPENDENCIES:
+	Libraries
+
+	Language
+		C++20;
+	Preprocessor
+		WIN32;
+
+FUNCTIONS:
+	bool senn_getversion(char* version, size_t version_size, char* release, size_t release_size);
+		This returns the version and release date of the library
+
+	bool senn_initialize(HENN* ph);
+		This function initializes the library and allocates appropriate memory and internal variables.
+
+	bool senn_uninitialize(HENN &h);
+		This function uninitializes the library and frees all memory that was allocated through it.
+
+	bool senn_setpropertyvalue(HENN &h, CTPROP propid, int  value);
+		This function gets the current value of specific properties of the library.
+
+	bool senn_getpropertyvalue(HENN &h, CTPROP propid, int *value);
+		This function sets a new value for the specified property of the library.
+
+	bool senn_setnetworkattributes(HENN &h, int inputs, int outputs);
+		This function defines the number of inputs and outputs of the network.
+
+	bool senn_configuremutationratio(HENN &h, int totaloptions, int input_add, int input_remove, int node_add, int node_remove);
+		This function sets the ratio of mutation type when a random mutation is called.
+
+	bool senn_setbasesize(HENN &h, int size);
+		This sets the number of AIs for the base.
+
+	bool senn_setclustersize(HENN &h, int size);
+		This sets the number of AIs for the cluster.
+
+	bool senn_addfitness(HENN &h, int clusterindex, float fitness);
+		The fitness value is used to determine the best AIs for each session. This function lets you
+		add the specified fitness value to the AI.
+
+	bool senn_setfitness(HENN &h, int clusterindex, float fitness);
+		The fitness value is used to determine the best AIs for each session. This function lets you
+		set the specified fitness value to the AI and replacing the previous value.
+
+	bool senn_getfitness(HENN &h, int clusterindex, float *fitness);
+		The fitness value is used to determine the best AIs for each session. This function lets you
+		determine the current fitness value for the AI.  The current value is unchanged.
+
+	bool senn_initializebase(HENN &h);
+		When creating a new AI or resetting an old one, you will need to create a set of base neural
+		networks.  This function creates a simple fully-connected network with random connections weights
+		for base0.  It will then fill the rest of the base array with mutations of base0.
+
+	bool senn_selectbasenetworks(HENN &h);
+		After a session has been completed, this function will determine the best performing AIs from
+		the cluster array and set them as the new base AIs.
+
+	bool senn_createclusterfrombase(HENN &h);
+		This function will create new AIs from mutations of the base AIs.
+
+	bool senn_destroycluster(HENN &h);
+		This function will clear the memory used by the cluster array.
+
+	bool senn_destroybase(HENN &h);
+		This function will clear the memory used by the base array.
+
+	bool senn_feedforward(HENN &h, int clusterindex, const std::vector<double>& input, std::vector<double>& output);
+		This function will take the values of the input array and apply them to the AI associated with the 
+		cluster index.  The output array will be the results of the calculations of the neural network.
+
+	bool senn_feedforward_v2(HENN& h, int clusterindex, const double input[], int num_inputs, double output[], int *num_outputs);
+		This function will take the values of the input array and apply them to the AI associated with the 
+		cluster index.  The output array will be the results of the calculations of the neural network.
+
+	bool senn_savebasenetworktofile(HENN &h, int baseindex, std::string filepath);
+		This function will save the base AI at the specific index to a text file at the specified filepath.
+
+	bool senn_loadbasenetworkfromfile(HENN &h, int baseindex, std::string filepath);
+		This function will read the information of the file at the specified filepath and load it into the
+		base at the specified index.
+
+	bool senn_printdebug(HENN &h, int clusterindex);
+		This function will print the details of the specified cluster AI to the console screen.
+
+	bool senn_printdebug_base(HENN &h, int baseindex);
+		This function will print the details of the specified base AI to the console screen.
+
+TODO:
+	- (low) add new save file format to save all base networks to one file
+	- (low) create separate program to read files
+	- (1.0.1) add generation member into evonet class
+	- (1.0.1) add ability to modify mutationtype ratio
+
+BUG LIST:
+	- (fixed - 1.0.1) loading an AI will now trigger an infinity loop error.
+
+RELEASES:
+1.0.1 - 6/6/24
+	- added generation member into ctnet class
+	- ctnet::configuremutationratio() - added ability to modify mutationtype ratio (senn_configuremutationratio)
+	- ctnet::mutateaddinput() - fixed infinity loop error
+
+1.0.0 - 12/1/23
+	- Initial release
+
