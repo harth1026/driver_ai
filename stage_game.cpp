@@ -252,7 +252,7 @@ STAGE game::update(int timepoint)
 			VEHICLE_CONTROLS tc;
 
 			/* TOTAL AI
-			BASE DEFAULT
+			TANK BASE
 			* INPUTS - 5
 				POSITION SELF 2x
 				RELATIVE POSITION TARGET 2x
@@ -261,7 +261,7 @@ STAGE game::update(int timepoint)
 				TURN BODY
 				MOVE BODY
 
-			HOVER
+			HOVER BASE
 			* INPUTS - 6
 				POSITION SELF 2x
 				VELOCITY SELF 2x

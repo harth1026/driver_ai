@@ -88,6 +88,9 @@
     <ClInclude Include="target.h">
       <Filter>main_application</Filter>
     </ClInclude>
+    <ClInclude Include="medlay\ctline.h">
+      <Filter>medlay</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="senn\release_notes.txt">

@@ -146,6 +146,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="medlay\ctcolor.h" />
+    <ClInclude Include="medlay\ctline.h" />
     <ClInclude Include="medlay\ctmath.h" />
     <ClInclude Include="medlay\ctmedlay.h" />
     <ClInclude Include="medlay\ctobject.h" />
