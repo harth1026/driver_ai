@@ -69,6 +69,9 @@ BUG LIST:
 
 RELEASES:
 
+1.0.1 - 6/17/24
+	- Fixed ctmath::ctmath_angle() and ctmath::ctmath_relativeangle().  Now returns correct values.
+
 1.0.0 - 6/6/24
 	- Initial release
 
