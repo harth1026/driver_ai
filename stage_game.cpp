@@ -8,8 +8,8 @@
 
 #define OUTPUT_TOLERANCE		0.1
 
-#define DRIVER_BASE				base_hover
-//#define DRIVER_BASE				base_tank
+//#define DRIVER_BASE				base_hover
+#define DRIVER_BASE				base_tank
 //#define DRIVER_BASE			base_car		// TODO
 
 
@@ -61,7 +61,7 @@ bool game::initialize()
 	{
 		vehicle_initialize(&(m_vehicle[i]), DRIVER_BASE, VEHICLE_START, 0);
 	}
-	CTVEC2f target_start = CTVEC2f((float)(rand() % BOARD_SIZEX), (float)(rand() % BOARD_SIZEY));
+	CTVEC2f target_start = CTVEC2f((float)((rand() % (BOARD_SIZEX - 100)) + 50), (float)((rand() % (BOARD_SIZEY - 100)) + 50));
 	target_initialize(&(m_target), target_start);
 
 #if USE_SAVEFILE
@@ -107,17 +107,13 @@ bool game::initialize()
 
 	switch (DRIVER_BASE)
 	{
-	case base_tank:
-		inputs = 5;
-		outputs = 2;
-		break;
-
+	default:
 	case base_hover:
 		inputs = 6;
 		outputs = 2;
 		break;
 
-	default:
+	case base_tank:
 		inputs = 5;
 		outputs = 2;
 		break;
@@ -208,7 +204,7 @@ bool game::reset()
 		senn_setfitness(m_enn, i, 0);
 	}
 
-	CTVEC2f nexttargetpos = CTVEC2f((float)(rand() % BOARD_SIZEX), (float)(rand() % BOARD_SIZEY));
+	CTVEC2f nexttargetpos = CTVEC2f((float)((rand() % (BOARD_SIZEX - 100)) + 50), (float)((rand() % (BOARD_SIZEY - 100)) + 50));
 	target_reset(&(m_target), nexttargetpos);
 
 	m_starttarget = m_starttime = clock();
@@ -306,7 +302,7 @@ STAGE game::update(int timepoint)
 				inputs.push_back(dval);
 
 				// RELATIVE ANGLE BODY SELF
-				dval = ctmath_relativeangle(m_vehicle[i].m_so_body.m_pos, m_target.m_so_body.m_pos, m_vehicle[i].m_so_body.m_ang);
+				dval = ctmath_relativeangle(m_vehicle[i].m_so_body.m_pos, m_target.m_so_body.m_pos, m_vehicle[i].m_so_body.m_ang) / 180.0f;
 				inputs.push_back(dval);
 				break;
 
